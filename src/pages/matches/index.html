@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Matches - Find Match</title>
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+<body>
+    <header>
+        <nav id="mainNav"></nav>
+    </header>
+    <main>
+        <section id="matchmaking">
+            <h2>Find a Match</h2>
+            <button id="findMatch">Find Match</button>
+        </section>
+        <section id="activeMatch" class="hidden">
+            <h2>Active Match</h2>
+            <div id="matchInfo"></div>
+            <div id="resultSubmission"></div>
+        </section>
+    </main>
+    <script type="module" src="/src/pages/matches/matches.ts"></script>
+</body>
+</html>

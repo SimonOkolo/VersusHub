@@ -1,0 +1,52 @@
+/* Dashboard layout */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+/* Stats card */
+.stats-card {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.stats-card h2 {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+/* Recent matches */
+.recent-matches {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.match-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.match-item:last-child {
+    border-bottom: none;
+}
+
+/* Quick actions */
+.quick-actions {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.quick-actions button {
+    width: 100%;
+}

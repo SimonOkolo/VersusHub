@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VsH Dashboard</title>
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body>
+    <div class="dashboard">
+        <div class="dashboard-header">
+            <h1>Welcome, <span id="username">Player</span>!</h1>
+            <div class="user-stats">
+                <div class="stat-box">
+                    <div class="stat-icon rank-icon">👑</div>
+                    <div class="stat-info">
+                        <h3>Rank</h3>
+                        <p id="userRank">Loading...</p>
+                        <p id="userDivision" class="division">Division</p>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon reputation-icon">⭐</div>
+                    <div class="stat-info">
+                        <h3>Reputation</h3>
+                        <p id="userReputation">Loading...</p>
+                        <div class="reputation-bar">
+                            <div id="reputationProgress" class="progress"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-icon coins-icon">🪙</div>
+                    <div class="stat-info">
+                        <h3>VsH Coins</h3>
+                        <p id="userCoins">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <main class="dashboard-main">
+            <section class="play-section">
+                <h2>Play Now</h2>
+                <div class="game-selector">
+                    <div class="search-container">
+                        <input type="text" id="gameSearch" placeholder="Search for a game...">
+                        <select id="gameSelect">
+                            <option value="">Select a game</option>
+                            <option value="fortnite">Fortnite</option>
+                            <option value="valorant">Valorant</option>
+                            <option value="csgo">CS:GO</option>
+                            <option value="lol">League of Legends</option>
+                            <option value="rocket">Rocket League</option>
+                        </select>
+                    </div>
+                    <div class="mode-selector">
+                        <button class="mode-btn ranked-btn">Ranked</button>
+                        <button class="mode-btn standard-btn">Standard</button>
+                    </div>
+                </div>
+                <div id="matchmaking" class="matchmaking hidden">
+                    <div class="searching-animation">
+                        <div class="pulse"></div>
+                        <p>Searching for opponents...</p>
+                    </div>
+                    <button id="cancelSearch" class="cancel-btn">Cancel Search</button>
+                </div>
+            </section>
+
+            <section class="recent-matches">
+                <h2>Recent Matches</h2>
+                <div id="matchesList" class="matches-list">
+                    <!-- Matches will be populated here -->
+                </div>
+            </section>
+        </main>
+    </div>
+    <script type="module" src="./dashboard.ts"></script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VersusHub</title>
+    <link rel="icon" type="image/x-icon" href="/img/VhLogo.ico">
+    <link rel="stylesheet" href="/src/styles/main.css">
+    <link rel="stylesheet" href="/src/styles/landing.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Jersey+25&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="landing-page">
+        <!-- Pixel Background -->
+        <div class="pixel-background"></div>
+
+        <!-- Header -->
+        <header>
+            <img src="/img/VsHubLogo.png" alt="VersusHub Logo" class="logo-small">
+            <div class="user-buttons">
+                <button id="loginBtn" class="btn-retro login">Log In</button>
+                <button id="signupBtn" class="btn-retro signup">Sign Up</button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-left">
+                    <img src="/img/VsHubLogo.png" alt="VersusHub Logo" class="logo">
+                    <p class="tagline">Welcome to VersusHub, the ultimate platform for competitive gaming. Whether you're a casual player or a pro, we provide a fair, secure, and engaging environment for 1v1 tournaments.</p>
+                    <button id="getStarted" class="btn-retro-large">Get Started</button>
+                </div>
+                <div class="hero-right">
+                    <img src="/img/crownasciiimg.png">
+                </div>
+            </section>
+
+            <!-- Features Section -->
+            <section class="features-section">
+                <h2 class="section-title">Why Choose VersusHub?</h2>
+                <div class="features">
+                    <!-- Dynamically rendered features -->
+                </div>
+            </section>
+
+            <div class="lower-landing">
+                <!-- How It Works Section -->
+                <section class="how-it-works">
+                    <h2 class="section-title">How It Works</h2>
+                    <div class="HiwContents">
+                        <div class="timeline">
+                            <div class="timeline-node" data-step="1"></div>
+                            <div class="timeline-node" data-step="2"></div>
+                            <div class="timeline-node" data-step="3"></div>
+                            <div class="timeline-node" data-step="4"></div>
+                        </div>
+                        <div class="timeline-text" id="timelineText">
+                            <!-- Text content for each step will be dynamically updated here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FAQ Section -->
+                <section class="faq-section">
+                    <h2 class="section-title">FAQ</h2>
+                    <div class="faq">
+                        <div class="faq-item">
+                            <h3>How does the reputation system work?</h3>
+                            <p>Your reputation is influenced by fair play, match outcomes, and behavior. Abandoning matches or lying about results will negatively impact your score.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3>What happens in case of a dispute?</h3>
+                            <p>We use video proof and a moderation system to resolve disputes fairly and efficiently.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3>Are there any fees to participate?</h3>
+                            <p>Participation is free for most matches. However, premium features or tournaments may have small fees.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <p>&copy; 2024 VersusHub. All rights reserved.</p>
+                <ul class="footer-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <script type="module" src="/src/landing.ts"></script>
+    <script>
+        
+        const nodes = document.querySelectorAll('.timeline-node');
+        const textBox = document.getElementById('timelineText');
+
+        const steps = [
+            "Sign Up and create your profile.",
+            "Start or join a tournament and play your matches.",
+            "Submit your results and build your reputation.",
+            "Climb the leaderboards and earn rewards."
+        ];
+
+        let currentStep = 0;
+        
+        function updateStep(index) {
+            nodes.forEach(node => node.classList.remove('active'));
+            nodes[index].classList.add('active');
+            textBox.textContent = steps[index];
+        }
+
+        nodes.forEach((node, index) => {
+            node.addEventListener('click', () => {
+                currentStep = index;
+                updateStep(currentStep);
+                restartTimer();
+            });
+        });
+
+        function autoAdvance() {
+            currentStep = (currentStep + 1) % steps.length;
+            updateStep(currentStep);
+        }
+
+        let timer = setInterval(autoAdvance, 8000);
+
+        function restartTimer() {
+            clearInterval(timer);
+            timer = setInterval(autoAdvance, 8000);
+        }
+
+        document.querySelectorAll('.faq-item h3').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling; // Get the <p> element
+                const isExpanded = content.style.maxHeight === '500px';
+
+                // Reset all FAQ items if only one at a time should expand
+                document.querySelectorAll('.faq-item p').forEach(p => {
+                    p.style.maxHeight = '0px';
+                });
+
+                // Expand or collapse the clicked item
+                if (!isExpanded) {
+                    content.style.maxHeight = '500px';
+                }
+            });
+        });
+
+        updateStep(currentStep);
+    </script>
+</body>
+</html>
