@@ -4,14 +4,13 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { UserService } from '../../services/userService';
 import { User } from '../../types';
 
-// Initialize header
-new Header();
-
 // Initialize dashboard data
 class Dashboard {
     private user: User | null = null;
+    private header: Header;
 
     constructor() {
+        this.header = new Header();
         this.initializeAuthListener();
     }
 
@@ -20,12 +19,19 @@ class Dashboard {
             if (user) {
                 // Get user data from Firestore
                 this.user = await UserService.getUser(user.uid);
+                
+                // Update header with user data
+                if (this.user) {
+                    this.header.updateProfilePicture(this.user.profilePicture);
+                }
+
                 this.updateDashboard();
             } else {
                 window.location.href = '/src/pages/auth/';
             }
         });
     }
+
 
     private updateDashboard() {
         if (!this.user) return;

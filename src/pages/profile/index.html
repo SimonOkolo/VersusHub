@@ -3,25 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaming Matches - Profile</title>
-    <link rel="stylesheet" href="/src/styles/main.css">
+    <title>Profile - VsH</title>
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/src/components/header/header.css">
+    <link rel="stylesheet" href="./profile.css">
 </head>
 <body>
-    <header>
-        <nav id="mainNav"></nav>
-    </header>
-    <main>
-        <section id="userProfile">
-            <h2>Your Profile</h2>
-            <div id="profileInfo"></div>
-            <div id="rankInfo"></div>
-            <div id="reputationInfo"></div>
-        </section>
-        <section id="matchHistory">
-            <h2>Match History</h2>
-            <div id="matchList"></div>
-        </section>
-    </main>
-    <script type="module" src="/src/pages/profile/profile.ts"></script>
+    <div class="profile-page">
+        <header class="profile-header">
+            <div class="profile-banner">
+                <div class="profile-info">
+                    <profile-picture id="profilePicture"></profile-picture>
+                    <h1 id="username">Loading...</h1>
+                </div>
+            </div>
+        </header>
+
+        <main class="profile-content">
+            <stats-card></stats-card>
+            
+            <section class="clan-section">
+                <h2>Clan</h2>
+                <clan-card></clan-card>
+            </section>
+
+            <section class="game-stats">
+                <h2>Game Statistics</h2>
+                <div id="gameStatsList" class="game-stats-grid"></div>
+            </section>
+        </main>
+    </div>
+    <script type="module" src="./profile.ts"></script>
 </body>
 </html>

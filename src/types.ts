@@ -10,7 +10,52 @@ export interface User {
   createdAt: number;
   matchesPlayed: number;
   matchesWon: number;
+  matchesLost: number;
   profilePicture: string;
+  clanId?: string;
+  stats: UserStats;
+}
+
+export interface UserStats {
+  totalWins: number;
+  totalLosses: number;
+  winRate: number;
+  gameStats: { [gameId: string]: GameStats };
+}
+
+export interface GameStats {
+  wins: number;
+  losses: number;
+  winRate: number;
+  lastPlayed: number;
+}
+
+export interface Clan {
+  id: string;
+  name: string;
+  tag: string;
+  description: string;
+  createdAt: number;
+  founderUserId: string;
+  memberCount: number;
+  profilePicture: string;
+  bannerPicture: string;
+  members: ClanMember[];
+  stats: ClanStats;
+}
+
+export interface ClanMember {
+  userId: string;
+  role: ClanRole;
+  joinedAt: number;
+  contributedWins: number;
+}
+
+export interface ClanStats {
+  totalWins: number;
+  totalMatches: number;
+  weeklyWins: number;
+  monthlyWins: number;
 }
 
 export interface Match {
@@ -53,4 +98,11 @@ export enum ReputationRank {
   UNFAIR = 'Unfair',
   GOOD_PLAYER = 'Good Player',
   TRUSTWORTHY = 'Trustworthy'
+}
+
+export enum ClanRole {
+  LEADER = 'leader',
+  CO_LEADER = 'co-leader',
+  ELDER = 'elder',
+  MEMBER = 'member'
 }

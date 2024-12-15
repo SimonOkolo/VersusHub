@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background-color: var(--card-background);
+    background-color: #00000063;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -16,8 +16,8 @@
 }
 
 .profile-picture {
-    width: 40px;
-    height: 40px;
+    width: 50px;  /* Decreased size */
+    height: 50px;
     border-radius: 50%;
     cursor: pointer;
     border: 2px solid var(--primary-color);
@@ -29,39 +29,35 @@
 }
 
 .dropdown {
+    display: none;
     position: absolute;
     top: 100%;
     right: 0;
-    margin-top: 0.5rem;
-    background-color: var(--card-background);
-    border-radius: var(--border-radius);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    min-width: 200px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
+    width: 200px;
+    color: #fff;
+    background-color: rgba(82, 82, 82, 0.392);
+    border: 1px solid #3e009a;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 10;
 }
 
 .dropdown.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+    display: block;
 }
 
 .dropdown-item {
-    padding: 0.8rem 1rem;
-    color: var(--text-color);
+    display: block;
+    padding: 10px;
     text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    color: rgb(255, 255, 255);
+}
+
+.dropdown-item i {
+    margin-right: 10px;
 }
 
 .dropdown-item:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255,255,255,0.1);  /* Subtle hover effect */
 }
 
 .dropdown-item:first-child {
@@ -76,6 +72,5 @@
 
 .dropdown-divider {
     height: 1px;
-    background-color: rgba(255, 255, 255, 0.1);
-    margin: 0.5rem 0;
+    background-color: #3e009a;
 }

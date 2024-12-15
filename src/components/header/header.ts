@@ -1,6 +1,5 @@
 import { auth } from '../../lib/firebase';
 import { signOut } from 'firebase/auth';
-import { UserService } from '../../services/userService';
 
 export class Header {
     private profilePicture!: HTMLImageElement;
@@ -9,75 +8,76 @@ export class Header {
     constructor() {
         this.initializeElements();
         this.setupEventListeners();
-        this.loadUserProfilePicture();
-    }
-
-    private async loadUserProfilePicture() {
-        const user = auth.currentUser;
-        if (user) {
-            const userData = await UserService.getUser(user.uid);
-            if (userData?.profilePicture) {
-                this.profilePicture.src = userData.profilePicture;
-            }
-        }
     }
 
     private initializeElements() {
         const header = document.createElement('header');
         header.className = 'header';
-
+    
+        // Logo container with a clickable link
+        const logoLink = document.createElement('a');
+        logoLink.href = '/src/pages/dashboard/';
+    
         // Logo
         const logo = document.createElement('img');
         logo.src = '/img/VsHubLogo.png';
         logo.alt = 'VersusHub Logo';
         logo.className = 'logo-small';
-
+    
+        logoLink.appendChild(logo); // Append the logo to the anchor tag
+    
         // Profile container
         const profileContainer = document.createElement('div');
         profileContainer.className = 'profile-container';
-
+    
         // Profile picture
         this.profilePicture = document.createElement('img');
-        this.profilePicture.src = '/img/default-avatar.png'; // Default avatar
-        this.profilePicture.alt = 'Profile Picture';
+        this.profilePicture.alt = 'PFP';
         this.profilePicture.className = 'profile-picture';
-
+    
         // Dropdown
         this.dropdown = document.createElement('div');
         this.dropdown.className = 'dropdown';
         this.dropdown.innerHTML = `
-            <a href="/profile" class="dropdown-item">
+            <a href="/src/pages/profile/" class="dropdown-item">
                 <span>Profile</span>
             </a>
-            <a href="/clans" class="dropdown-item">
+            <a href="/src/pages/clans/" class="dropdown-item">
                 <span>Clans</span>
             </a>
             <div class="dropdown-divider"></div>
-            <div class="dropdown-item" id="logoutBtn">
+            <div class="dropdown-item" id="logoutBtn" style="cursor: pointer;">
                 <span>Logout</span>
             </div>
         `;
-
+    
         profileContainer.appendChild(this.profilePicture);
         profileContainer.appendChild(this.dropdown);
-        header.appendChild(logo);
+    
+        // Append the clickable logo to the header
+        header.appendChild(logoLink);
+    
         header.appendChild(profileContainer);
-
+    
         document.body.insertBefore(header, document.body.firstChild);
     }
+    
 
     private setupEventListeners() {
-        // Toggle dropdown
-        this.profilePicture.addEventListener('click', () => {
-            this.dropdown.classList.toggle('active');
+        // Toggle dropdown when profile picture is clicked
+        this.profilePicture.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.toggleDropdown();
         });
 
         // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!this.profilePicture.contains(e.target as Node) && 
-                !this.dropdown.contains(e.target as Node)) {
-                this.dropdown.classList.remove('active');
-            }
+        document.addEventListener('click', () => {
+            this.closeDropdown();
+        });
+
+        // Prevent dropdown from closing when clicked inside
+        this.dropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
         });
 
         // Logout functionality
@@ -90,5 +90,19 @@ export class Header {
                 console.error('Error signing out:', error);
             }
         });
+    }
+
+    private toggleDropdown() {
+        this.dropdown.classList.toggle('active');
+    }
+
+    private closeDropdown() {
+        this.dropdown.classList.remove('active');
+    }
+
+    updateProfilePicture(pictureUrl: string) {
+        if (pictureUrl) {
+            this.profilePicture.src = pictureUrl;
+        }
     }
 }
