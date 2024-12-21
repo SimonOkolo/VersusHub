@@ -4,36 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VsH Dashboard</title>
-    <link rel="stylesheet" href="/src/style.css">
     <link rel="stylesheet" href="/src/components/header/header.css">
     <link rel="stylesheet" href="./dashboard.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 </head>
 <body>
-    <div class="pixel-background"></div>
+    <div class="dashboard-left">
+        <img src="/public/img/VhLogo.ico">
+        <div class="dash-left-top" id="dash-selection">
+            <a href="../../../src/pages/dashboard/index.html" class="material-symbols-outlined" style="font-size:30px;">home</a>
+            <a href="../../../src/pages/dashboard/index.html" class="material-symbols-outlined" style="font-size:30px;">search</a>
+            <a href="../../../src/pages/dashboard/index.html" class="material-symbols-outlined" style="font-size:30px;">calendar_today</a>
+        </div>
+        <div class="dash-left-bottom" id="dash-selection">
+            <a class="material-symbols-outlined" style="font-size:30px;" id="profile-btn">person</a>
+            <a href="../../../src/pages/dashboard/index.html" class="material-symbols-outlined" style="font-size:30px;">mail</a>
+            <a class="material-symbols-outlined" style="font-size:30px;" id="logout-btn">logout</a>
+        </div>
+    </div>
     <div class="dashboard">
+
         <div class="dashboard-header">
-            <h1>Welcome, <span id="username">Player</span>!</h1>
+            <div class="player-username">
+                <h1>Welcome, <span id="username">Player</span>!</h1>
+            </div>
             <div class="user-stats">
                 <div class="stat-box">
-                    <div class="stat-icon rank-icon">👑</div>
-                    <div class="stat-info">
-                        <h3>Rank</h3>
-                        <p id="userRank">Loading...</p>
-                        <p id="userDivision" class="division">Division</p>
-                    </div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-icon reputation-icon">⭐</div>
                     <div class="stat-info">
                         <h3>Reputation</h3>
                         <p id="userReputation">Loading...</p>
-                        <div class="reputation-bar">
-                            <div id="reputationProgress" class="progress"></div>
-                        </div>
                     </div>
                 </div>
                 <div class="stat-box">
-                    <div class="stat-icon coins-icon">🪙</div>
                     <div class="stat-info">
                         <h3>VsH Coins</h3>
                         <p id="userCoins">Loading...</p>
@@ -43,40 +45,34 @@
         </div>
 
         <main class="dashboard-main">
-            <section class="play-section">
-                <h2>Play Now</h2>
-                <div class="game-selector">
-                    <div class="search-container">
-                        <input type="text" id="gameSearch" placeholder="Search for a game...">
-                        <select id="gameSelect">
-                            <option value="">Select a game</option>
-                            <option value="fortnite">Fortnite</option>
-                            <option value="valorant">Valorant</option>
-                            <option value="csgo">CS:GO</option>
-                            <option value="lol">League of Legends</option>
-                            <option value="rocket">Rocket League</option>
-                        </select>
+            <div class="main-left">
+                <section class="user-games">
+                    <p class="section-title">Your Games</p>
+                    <div class="add-game-controls">
+                        <select id="add-game-dropdown">
+                            <option value="">Add a game</option>
+                            </select>
+                        <button id="add-game-button" disabled>Add</button>
                     </div>
-                    <div class="mode-selector">
-                        <button class="mode-btn ranked-btn">Ranked</button>
-                        <button class="mode-btn standard-btn">Standard</button>
-                    </div>
-                </div>
-                <div id="matchmaking" class="matchmaking hidden">
-                    <div class="searching-animation">
-                        <div class="pulse"></div>
-                        <p>Searching for opponents...</p>
-                    </div>
-                    <button id="cancelSearch" class="cancel-btn">Cancel Search</button>
-                </div>
-            </section>
+                    <ul id="user-games-list">
+                        <!-- Games will be populated here -->
+                    </ul>
+                </section>
 
-            <section class="recent-matches">
-                <h2>Recent Matches</h2>
-                <div id="matchesList" class="matches-list">
-                    <!-- Matches will be populated here -->
-                </div>
-            </section>
+                <section class="matchmaking">
+                    <p class="section-title">Matchmake</p>
+                    <div id="matchmake-options">
+                        <!-- Matchmaking options will be populated here -->
+                        <p>Select a game to start matchmaking.</p>
+                    </div>
+                </section>
+            </div>
+            <div class="main-right">
+                <p class="section-title">Tournaments</p>
+                <ul id="tournament-list">
+                    <!-- Tournaments will be populated here -->
+                </ul>
+            </div>
         </main>
     </div>
     <script type="module" src="./dashboard.ts"></script>

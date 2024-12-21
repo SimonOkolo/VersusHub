@@ -1,4 +1,4 @@
-import { auth, db } from '../../lib/firebase';
+import { auth } from '../../lib/firebase';
 import { 
     createUserWithEmailAndPassword, 
     signInWithEmailAndPassword,

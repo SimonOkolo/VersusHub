@@ -1,4 +1,4 @@
-import { db } from '../firebase';
+import { db } from '../lib/firebase';
 import { collection, addDoc, updateDoc, doc, getDoc } from 'firebase/firestore';
 import { Match, MatchStatus } from '../types';
 

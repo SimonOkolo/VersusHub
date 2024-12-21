@@ -2,9 +2,6 @@ export interface User {
   id: string;
   username: string;
   reputation: number;
-  rank: Rank;
-  division: Division;
-  rankPoints: number;
   coins: number;
   reputationRank: ReputationRank;
   createdAt: number;
@@ -20,14 +17,16 @@ export interface UserStats {
   totalWins: number;
   totalLosses: number;
   winRate: number;
-  gameStats: { [gameId: string]: GameStats };
+  gameStats: { [gameId: string]: GameSpecificStats };
 }
 
-export interface GameStats {
+export interface GameSpecificStats {
   wins: number;
   losses: number;
   winRate: number;
   lastPlayed: number;
+  rankPoints: number;
+  experience: number;
 }
 
 export interface Clan {
@@ -58,14 +57,40 @@ export interface ClanStats {
   monthlyWins: number;
 }
 
-export interface Match {
+export interface ClanInvite {
   id: string;
-  player1Id: string;
-  player2Id: string;
-  winnerId?: string;
-  status: MatchStatus;
-  proofUrl?: string;
+  clanId: string;
+  clanName: string;
+  userId: string;
+  inviterId: string;
+  inviterName: string;
   timestamp: number;
+  status: 'pending' | 'accepted' | 'declined';
+}
+
+export interface ClanAnnouncement {
+  id: string;
+  clanId: string;
+  authorId: string;
+  authorName: string;
+  content: string;
+  timestamp: number;
+}
+
+export interface ClanMessage {
+  id: string;
+  clanId: string;
+  authorId: string;
+  authorName: string;
+  content: string;
+  timestamp: number;
+}
+
+export enum ClanRole {
+  LEADER = 'leader',
+  CO_LEADER = 'co-leader',
+  ELDER = 'elder',
+  MEMBER = 'member'
 }
 
 export enum MatchStatus {
@@ -98,11 +123,4 @@ export enum ReputationRank {
   UNFAIR = 'Unfair',
   GOOD_PLAYER = 'Good Player',
   TRUSTWORTHY = 'Trustworthy'
-}
-
-export enum ClanRole {
-  LEADER = 'leader',
-  CO_LEADER = 'co-leader',
-  ELDER = 'elder',
-  MEMBER = 'member'
 }

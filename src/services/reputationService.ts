@@ -1,4 +1,4 @@
-import { db } from '../firebase';
+import { db } from '../lib/firebase';
 import { doc, updateDoc, getDoc } from 'firebase/firestore';
 import { ReputationRank } from '../types';
 
@@ -16,11 +16,10 @@ export class ReputationService {
 
     await updateDoc(userRef, {
       reputation: newReputation,
-      reputationRank: this.calculateReputationRank(newReputation)
     });
   }
 
-  private static calculateReputationRank(reputation: number): ReputationRank {
+  public static calculateReputationRank(reputation: number): ReputationRank {
     if (reputation < -10) return ReputationRank.UNRELIABLE;
     if (reputation < 0) return ReputationRank.UNFAIR;
     if (reputation < 50) return ReputationRank.GOOD_PLAYER;

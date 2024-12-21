@@ -1,5 +1,5 @@
-import { auth, db, storage } from './firebase';
-import { collection, query, where, onSnapshot } from 'firebase/firestore';
+import { auth, db, storage } from './lib/firebase';
+import { collection, query, where, onSnapshot, doc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { MatchService } from './services/matchService';
 import { RankService } from './services/rankService';
